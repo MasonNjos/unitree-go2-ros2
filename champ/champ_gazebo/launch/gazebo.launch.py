@@ -10,7 +10,7 @@ from launch.actions import (DeclareLaunchArgument, ExecuteProcess,
 from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import Command, LaunchConfiguration, PythonExpression
-
+from launch_ros.parameter_descriptions import ParameterValue
 
 def generate_launch_description():
 
@@ -125,7 +125,7 @@ def generate_launch_description():
         # prefix=['xterm -e gdb -ex run --args'],
     )
 
-    robot_description = {"robot_description": Command(["xacro ", LaunchConfiguration("description_path")])}
+    robot_description = {"robot_description": ParameterValue(Command(["xacro ", LaunchConfiguration("description_path")]), value_type=str)}
 
 
     load_joint_state_controller = ExecuteProcess(

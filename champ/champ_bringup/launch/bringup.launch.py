@@ -18,7 +18,7 @@ from launch.event_handlers.on_execution_complete import OnExecutionComplete
 from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import Command, LaunchConfiguration
-
+from launch_ros.parameter_descriptions import ParameterValue
 
 def generate_launch_description():
 
@@ -165,7 +165,7 @@ def generate_launch_description():
             {"publish_joint_control": LaunchConfiguration("publish_joint_control")},
             {"publish_foot_contacts": LaunchConfiguration("publish_foot_contacts")},
             {"joint_controller_topic": LaunchConfiguration("joint_controller_topic")},
-            {"urdf": Command(['xacro ', LaunchConfiguration('description_path')])},
+            {"urdf": ParameterValue(Command(['xacro ', LaunchConfiguration('description_path')]), value_type=str)},
             LaunchConfiguration('joints_map_path'),
             LaunchConfiguration('links_map_path'),
             LaunchConfiguration('gait_config_path'),
@@ -180,7 +180,7 @@ def generate_launch_description():
         parameters=[
             {"use_sim_time": LaunchConfiguration("use_sim_time")},
             {"orientation_from_imu": LaunchConfiguration("orientation_from_imu")},
-            {"urdf": Command(['xacro ', LaunchConfiguration('description_path')])},
+            {"urdf": ParameterValue(Command(['xacro ', LaunchConfiguration('description_path')]), value_type=str)},
             LaunchConfiguration('joints_map_path'),
             LaunchConfiguration('links_map_path'),
             LaunchConfiguration('gait_config_path'),
